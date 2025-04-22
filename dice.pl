@@ -10,22 +10,28 @@
 #-------------------------------------------------------------------#
 #        This code are released under the GPL 3.0 License.          #
 #===================================================================#
-
+use strict;
 use RPG::Dice;
 
 my $dice = RPG::Dice->new("1d6"); 
 
 my $words = $ARGV[0];
 
-$words = 6 unless($words);
+$words = 4 unless($words);
+
+my $passphrase = '';
 
 for ( my $i = 0; $i < $words; $i++ ) { 
-    $number = '';
+    my $number = '';
 
     for ( my $x = 0; $x < 6; $x++ ) { 
         $number .= $dice->roll();
     }
 
-    $word = qx(grep "^$number" dice_words.txt);
-    print "$word"; 
+    my $word = qx(grep \"^$number\" dice_words.txt);
+    print "$word";
+    $word =~ s/\d{6}|\n//g;
+    $passphrase .= $word;
 }
+
+print "\nPassphrase:$passphrase\n";
