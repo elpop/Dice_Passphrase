@@ -20,27 +20,36 @@ my $words = $ARGV[0];
 $words = 4 unless($words);
 
 my $passphrase = '';
+my %cache = ();
 
 print "Dic  Index  Word\n";
 
 for ( my $i = 0; $i < $words; $i++ ) { 
     my $number = '';
-
+    my $dic = 1;
+    
+    if ($i % 2 == 0) {
+        $dic =1;
+    }
+    else {
+        $dic = 2;
+    }
+    
     for ( my $x = 0; $x < 6; $x++ ) { 
         $number .= $dice->roll();
     }
-    my $word = '';
-    if ($i % 2 == 0) {
-        print ' 1 - ';
-        $word = qx(grep \"^$number\" dice_words_1.txt);
+    
+    if ( !exists($cache{"$dic$number"}) ) {
+        $cache{"$dic$number"} = 1;
+        print " $dic - ";
+        my $word = qx(grep \"^$number\" dice_words_$dic.txt);
+        print "$word";
+        $word =~ s/\d{6}|\n//g;
+        $passphrase .= $word;
     }
     else {
-        print ' 2 - ';
-        $word = qx(grep \"^$number\" dice_words_2.txt);
+        $i--;
     }
-    print "$word";
-    $word =~ s/\d{6}|\n//g;
-    $passphrase .= $word;
 }
 
 print "\nPassphrase:$passphrase\n";
