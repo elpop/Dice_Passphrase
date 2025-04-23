@@ -72,7 +72,7 @@ Passphrase: presentismo patuleca victorear fenazo mortera transgénica rebrincad
     sudo cpan -i RPG::Dice
     ```
 
-    Put the file **dice_words.txt** in the same path of the program.
+    Put the file **dice_words_1.txt** and **dice_words_2.txt** in the same path of the program.
     
 ## Words reference
 
