@@ -1,6 +1,18 @@
 #!/usr/bin/perl
+#===================================================================#
+# Program => passphrase.pl              (In Perl 5.0) version 1.0.1 #
+#===================================================================#
+# Autor         => Fernando "El Pop" Romo        (pop@cofradia.org) #
+# Creation date => 22/apr/2025                                      #
+#-------------------------------------------------------------------#
+# Info => Roll virtual dice and choose words for dictionary to make #
+#         a Passphrase.                                             #
+#-------------------------------------------------------------------#
+#        This code are released under the GPL 3.0 License.          #
+#===================================================================#
 use strict;
-use DBI;            # Interface to Database
+use DBI;
+use Math::Random::Secure qw(irand);
 
 my $words = $ARGV[0];
 $words = 4 unless($words);
@@ -16,9 +28,11 @@ if (-e "$work_dir/passphrase.db") {
     my $dbh = DBI->connect("dbi:SQLite:dbname=$work_dir/passphrase.db","","");
     $dbh->{PrintError} = 0; # Disable automatic  Error Handling
 
+    # prepare query on advanced
     my $SQL_Code = "select word from dictionary where dic = ? and dice_index = ?;";
     my $sth_read = $dbh->prepare($SQL_Code);
 
+    # Search the word on the DB
     sub read_word {
         my ($dic, $index) = @_;
         my $word = '';
@@ -30,6 +44,7 @@ if (-e "$work_dir/passphrase.db") {
         return $word;
     } # en sub read_word()
 
+    # loop the number of words to generate the passphrase
     for ( my $i = 0; $i < $words; $i++ ) { 
         my $number = '';
         my $dic = 1;
@@ -40,16 +55,18 @@ if (-e "$work_dir/passphrase.db") {
         else {
             $dic = 2;
         }
-    
+
+        # Roll the dice 6 times to generate the index 
         for ( my $x = 0; $x < 6; $x++ ) { 
-            $number .= int( rand( 6 ) ) + 1;
+            $number .= irand(6) + 1;
         }
     
         if ( !exists($cache{"$dic$number"}) ) {
             $cache{"$dic$number"} = 1;
             my $word = read_word($dic, "$number");
             $word =~ s/\n//g;
-            $passphrase .= ' ' . $word;
+            #print "$dic $number $word\n";
+            $passphrase .= $word . ' ';
         }
         else {
             $i--;
@@ -57,7 +74,7 @@ if (-e "$work_dir/passphrase.db") {
     }
     $dbh->disconnect;
 
-    print "Passphrase:$passphrase\n";
+    print "$passphrase\n";
 }
 else {
     print "No Passphrase words db available\nLoad the words lits wit db_load_words.pl\n";
