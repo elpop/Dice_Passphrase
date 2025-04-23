@@ -21,6 +21,8 @@ $words = 4 unless($words);
 
 my $passphrase = '';
 
+print "Dic  Index  Word\n";
+
 for ( my $i = 0; $i < $words; $i++ ) { 
     my $number = '';
 
@@ -29,10 +31,12 @@ for ( my $i = 0; $i < $words; $i++ ) {
     }
     my $word = '';
     if ($i % 2 == 0) {
-        $word = qx(grep \"^$number\" dice_words_2.txt);
+        print ' 1 - ';
+        $word = qx(grep \"^$number\" dice_words_1.txt);
     }
     else {
-        $word = qx(grep \"^$number\" dice_words_1.txt);
+        print ' 2 - ';
+        $word = qx(grep \"^$number\" dice_words_2.txt);
     }
     print "$word";
     $word =~ s/\d{6}|\n//g;
