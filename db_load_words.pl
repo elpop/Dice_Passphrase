@@ -68,6 +68,7 @@ sub load_words {
     open(DIC, "<", "$file") or die;
     print "load $file...\n";
     while (<DIC>) {
+        chomp;
         my ($index, $word) = split(/ /,$_);
         # insert the new record if not previously exists
         unless( already_on_results($dic, "$index") ) {
@@ -83,6 +84,7 @@ if ($init_flag) {
     # Load the words
     load_words(1,'dice_words_1.txt');
     load_words(2,'dice_words_2.txt');
+    load_words(3,'dice_special.txt');
     # clean up the DB
     $dbh->do('vacuum;');
     print "DB ready for use\n";
