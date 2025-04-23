@@ -27,8 +27,13 @@ for ( my $i = 0; $i < $words; $i++ ) {
     for ( my $x = 0; $x < 6; $x++ ) { 
         $number .= $dice->roll();
     }
-
-    my $word = qx(grep \"^$number\" dice_words.txt);
+    my $word = '';
+    if ($i % 2 == 0) {
+        $word = qx(grep \"^$number\" dice_words_2.txt);
+    }
+    else {
+        $word = qx(grep \"^$number\" dice_words_1.txt);
+    }
     print "$word";
     $word =~ s/\d{6}|\n//g;
     $passphrase .= $word;
