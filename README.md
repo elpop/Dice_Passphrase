@@ -145,7 +145,7 @@ load dice_special.txt...
 dice_special.txt loaded!
 DB ready for use
 ```
-The files **dice\_words\_1.txt**, **dice\_words\_2.txt** and **dice\_special.txt** must be in the same path of the **db\_load\_words.pl** program.
+The directory **words** must be in the same path of the **db\_load\_words.pl** program.
 
 The load of the data can take about 3 minutes or less, depending your computer and disk.
 
