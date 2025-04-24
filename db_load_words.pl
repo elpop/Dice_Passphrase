@@ -65,7 +65,7 @@ sub already_on_results {
 
 sub load_words {
     my ($dic, $file) = @_;
-    open(DIC, "<", "$file") or die;
+    open(DIC, "<", "words/$file") or die;
     print "load $file...\n";
     while (<DIC>) {
         chomp;
