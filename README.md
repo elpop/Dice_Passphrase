@@ -37,6 +37,22 @@ presentismo patuleca victorear fenazo mortera transgénica rebrincado aspearse
 
 ```
 
+Can generate multiple passphrase with a second parameter, for example, you want to generate ten with four words:
+
+```
+$ passphrase.pl 4 10
+inocentemente meliorativa positividad olmeda 
+despiertamente coccinélido cerasita apuntador 
+alevantar aiguaste mitificación santiagués 
+periforme voluntarioso expurgo taumatúrgico 
+recésit escocherar kurda tucura 
+prolífera detractora intrascendental antidiabético 
+palillo santol superferolítico conticinio 
+azulón pota exhaustiva intercadencia 
+agropecuario jarcia ictiólogo vendible 
+colchera chocón cataléptica trimestralmente 
+```
+
 ## Install
 
 1. Download file
