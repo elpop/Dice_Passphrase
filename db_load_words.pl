@@ -85,6 +85,13 @@ if ($init_flag) {
     load_words(1,'es_words_1.txt');
     load_words(2,'es_words_2.txt');
     load_words(3,'special_chars.txt');
+    load_words(4,'en_words_1.txt');
+    load_words(5,'en_words_2.txt');
+    load_words(6,'en_words_3.txt');
+    load_words(7,'en_words_4.txt');
+    load_words(8,'en_words_5.txt');
+    load_words(9,'en_words_6.txt');
+    load_words(10,'en_words_7.txt');
     # clean up the DB
     $dbh->do('vacuum;');
     print "DB ready for use\n";
