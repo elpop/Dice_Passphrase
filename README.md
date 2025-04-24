@@ -184,6 +184,15 @@ The directory **words** must be in the same path of the **db\_load\_words.pl** p
 
 The full load of the data can take about 17 minutes or less, depending your computer and disk.
 
+**IMPORTANT** If you are on a hurry, you can take the sqlite backup and put directly on the working dir:
+
+```
+cd db
+gzip -d passphrase.db.gz
+mkdir ~/.passphrase
+cp passphrase.db ~/.passpharse/.
+```
+
 Now, you can use the program :)
 
 ## Words reference
