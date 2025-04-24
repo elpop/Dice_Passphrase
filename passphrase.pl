@@ -18,6 +18,8 @@ my $words = $ARGV[0];
 $words = 4 unless($words);
 my $times = $ARGV[1];
 $times = 1 unless($times);
+my $debug = $ARGV[2];
+$debug = 0 unless($debug);
 
 my $work_dir = $ENV{'HOME'} . '/.passphrase'; # keys directory
 # if not exists the work directory, creates and put the init_flag on
@@ -50,15 +52,9 @@ if (-e "$work_dir/passphrase.db") {
         my %cache = ();
         for ( my $i = 0; $i < $words; $i++ ) {
             my $number = '';
-            my $dic = 1;
 
             # Choose the dictionary to use and alternate in each word
-            if ($i % 2 == 0) {
-                $dic =1;
-            }
-            else {
-                $dic = 2;
-            }
+            my $dic = irand(2) + 1;
 
             # Roll the dice 6 times to generate the index
             for ( my $x = 0; $x < 6; $x++ ) {
@@ -68,10 +64,10 @@ if (-e "$work_dir/passphrase.db") {
             # Check cache to avoid repeat the same word on the passphrase
             if ( !exists($cache{"$dic$number"}) ) {
                 $cache{"$dic$number"} = 1;
-                
-                # search the word 
+
+                # search the word
                 my $word = read_word($dic, "$number");
-                $word =~ s/\n//g;
+                print "$dic, $number, $word\n" if ($debug);
                 $passphrase .= $word . ' ';
             }
             # if exists a word collision decrement the word count
