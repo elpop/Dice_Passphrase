@@ -192,6 +192,10 @@ The source of the Spanish words come from [https://github.com/JorgeDuenasLerin/d
 
 The file **spanish_words.txt** has the original 107,920 words for your future use o for  create a random subset.
 
+The source of the English words come from [https://github.com/dwyl/english-words](https://github.com/dwyl/english-words)
+
+The file **english_words** has 370,105 words.
+
 ## Author
 
    Fernando Romo (pop@cofradia.org)
