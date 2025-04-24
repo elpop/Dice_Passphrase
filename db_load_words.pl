@@ -82,9 +82,9 @@ sub load_words {
 # if not exists the db schema, creates and star a initial load of the words
 if ($init_flag) {
     # Load the words
-    load_words(1,'dice_words_1.txt');
-    load_words(2,'dice_words_2.txt');
-    load_words(3,'dice_special.txt');
+    load_words(1,'es_words_1.txt');
+    load_words(2,'es_words_2.txt');
+    load_words(3,'special_chars.txt');
     # clean up the DB
     $dbh->do('vacuum;');
     print "DB ready for use\n";
