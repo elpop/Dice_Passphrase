@@ -16,9 +16,8 @@ use Math::Random::Secure qw(irand);
 
 my $words = $ARGV[0];
 $words = 4 unless($words);
-
-my $passphrase = '';
-my %cache = ();
+my $times = $ARGV[1];
+$times = 1 unless($times);
 
 my $work_dir = $ENV{'HOME'} . '/.passphrase'; # keys directory
 # if not exists the work directory, creates and put the init_flag on
@@ -44,37 +43,45 @@ if (-e "$work_dir/passphrase.db") {
         return $word;
     } # en sub read_word()
 
-    # loop the number of words to generate the passphrase
-    for ( my $i = 0; $i < $words; $i++ ) { 
-        my $number = '';
-        my $dic = 1;
-    
-        if ($i % 2 == 0) {
-            $dic =1;
-        }
-        else {
-            $dic = 2;
-        }
+    # loop the number of passphrases to generate
+    for ( my $t = 1; $t <= $times; $t++ ) {
+        # loop the number of words to generate the passphrase
+        my $passphrase = '';
+        my %cache = ();
+        for ( my $i = 0; $i < $words; $i++ ) {
+            my $number = '';
+            my $dic = 1;
 
-        # Roll the dice 6 times to generate the index 
-        for ( my $x = 0; $x < 6; $x++ ) { 
-            $number .= irand(6) + 1;
+            # Choose the dictionary to use and alternate in each word
+            if ($i % 2 == 0) {
+                $dic =1;
+            }
+            else {
+                $dic = 2;
+            }
+
+            # Roll the dice 6 times to generate the index
+            for ( my $x = 0; $x < 6; $x++ ) {
+                $number .= irand(6) + 1;
+            }
+
+            # Check cache to avoid repeat the same word on the passphrase
+            if ( !exists($cache{"$dic$number"}) ) {
+                $cache{"$dic$number"} = 1;
+                
+                # search the word 
+                my $word = read_word($dic, "$number");
+                $word =~ s/\n//g;
+                $passphrase .= $word . ' ';
+            }
+            # if exists a word collision decrement the word count
+            else {
+                $i--;
+            }
         }
-    
-        if ( !exists($cache{"$dic$number"}) ) {
-            $cache{"$dic$number"} = 1;
-            my $word = read_word($dic, "$number");
-            $word =~ s/\n//g;
-            #print "$dic $number $word\n";
-            $passphrase .= $word . ' ';
-        }
-        else {
-            $i--;
-        }
+        print "$passphrase\n";
     }
     $dbh->disconnect;
-
-    print "$passphrase\n";
 }
 else {
     print "No Passphrase words db available\nLoad the words lits wit db_load_words.pl\n";
