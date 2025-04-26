@@ -26,7 +26,7 @@ GetOptions(\%options,
            'help|?',
 );
 
-# Language paramters
+# Language parameters
 my %dic = (
     # Spanish
     'es' => {
@@ -36,7 +36,7 @@ my %dic = (
         'words'   => 4,
     },
     # English
-    'en' => { 
+    'en' => {
         'pages'   => 7,
         'rolls'   => 6,
         'max'     => 100,
@@ -115,6 +115,7 @@ else {
             # loop the number of words to generate the passphrase
             my $passphrase = '';
             my %cache = ();
+            print "Page Index  Word\n" if ($options{'verbose'});
             for ( my $i = 0; $i < $words; $i++ ) {
                 my $number = '';
 
@@ -135,7 +136,7 @@ else {
 
                     # search the word
                     my $word = read_word("$language", $page, "$number");
-                    print sprintf("%2s %6s %-20s\n",$page, $number, $word) if ($options{'verbose'});
+                    print sprintf(" %2s  %6s %-20s\n",$page, $number, $word) if ($options{'verbose'});
                     $passphrase .= $word . ' ';
                 }
                 # if exists a word collision decrement the word count
