@@ -244,14 +244,16 @@ show the generation and word selection process:
     Example:
 
         $ passphrase.pl -l en -w 3 -t 2 -v
-         9 626655 trephines
-         9 255425 faultier
-         4 253613 exostoses
-        trephines faultier exostoses
-         6 543425 scrupulous
-        10 423641 niobiums
-         8 353266 laptop
-        scrupulous niobiums laptop
+        Page Index  Word
+          5  656323 verricule           
+          2  534155 rightish            
+          7  431225 nonpoet             
+        verricule rightish nonpoet 
+        Page Index  Word
+          7  122164 ancylopod           
+          5  442464 overdeal            
+          4  353135 landlordly          
+        ancylopod overdeal landlordly 
 
 =item B<-help or -h or -?>
 
