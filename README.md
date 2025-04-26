@@ -25,52 +25,92 @@ Each number in the index, is the result of a dice roll, to obtain the index you 
 
 But i make a little program (passphrase.pl) to emulate the dice roll and generate the passphrase.
 
-```
-$ ./passphrase.pl
-juncino talacho amicísimo compaña
-
-$ ./passphrase_en.pl 
-upwound littlin neighbourship afterturn 
-```
-
-If you want a 12 word passphrase you only put the number of words on the program. the default is 4 words.
+## Summary
 
 ```
-$ ./passphrase.pl 12
-presentismo patuleca victorear fenazo mortera transgénica rebrincado aspearse
-hosca chaquetón cerra chascar
+$ ./passphrase.pl -h
+Usage:
+    passphrase.pl [options]
 
-$ ./passphrase_en.pl 12
-solubility ammeos annihilationistic unshrivelled empurples kneelet philosoph 
-declined merceries sabino copple coefficiently 
-```
+Options:
+    -languaje or -l
+            The -languaje or -l option show the passphrase on the given
+            languaje:
 
-Can generate multiple passphrase with a second parameter, for example, you want to generate ten with four words:
+                passphrase.pl -languaje es
 
-```
-$ passphrase.pl 4 10
-inocentemente meliorativa positividad olmeda 
-despiertamente coccinélido cerasita apuntador 
-alevantar aiguaste mitificación santiagués 
-periforme voluntarioso expurgo taumatúrgico 
-recésit escocherar kurda tucura 
-prolífera detractora intrascendental antidiabético 
-palillo santol superferolítico conticinio 
-azulón pota exhaustiva intercadencia 
-agropecuario jarcia ictiólogo vendible 
-colchera chocón cataléptica trimestralmente 
+                or
 
-$ ./passphrase_en.pl 5 10
-counterengine unbrent varsity intercitizenship nepotic 
-suade tweaking compels pursuer eldern 
-disinvolve choripetalae rasceta ghostliest occludent 
-multiprocess renavigation paradoxic burdenless galactoscope 
-nilot cabirian lohengrin rhythmical nonrepression 
-hookland overfrailness penthiophene offscape hexameter 
-vagueness planiphyllous fluigram warmouths surculus 
-bhaiachari sulphuran obelized intemperant prodromatically 
-engraphia borana bonasa cagayan wardlike 
-aeronef phosphatisation zirbanit wettability addedly 
+                passphrase.pl -l es
+
+                Example:
+
+                    $ passphrase.pl -l es
+                    allanabarrancos sochantre melgar prensero
+
+                The values can be "es" for espanish, "en" for english or
+                "special" to generate special random char.
+
+                The default value is "es".
+
+    -words or -w
+            generate the passphrase with number of words:
+
+                passphrase.pl -languaje en -words 5
+
+                or
+
+                passphrase.pl -l en -w 5
+
+                Example:
+
+                    $ passphrase.pl -l en -w 5
+                    interpolation stylelessness pussycats tythed typhlocele
+
+                The default value on spanish and english languajes is 4.
+
+    -times or -t
+            Generate multiple passphrase
+
+                passphrase.pl -languaje en -words 5 -times 3
+
+                or
+
+                passphrase.pl -l en -w 5 -t 3
+
+                Example:
+
+                    $ passphrase.pl -l en -w 5 -t 3
+                    stinkstone doeskins colorcaster stir chiricahua
+                    overbulk doughtiness myoedema dallyingly inequidistant
+                    lollops defrayers carcinomas experimentor fligger
+
+                The Default is 1 and the max value is 1,000.
+
+    -verbose or -v
+            show the generation and word selection process:
+
+                passphrase.pl -languaje en -words 3 -times 2 -verbose
+
+                or
+
+                passphrase.pl -l en -w 3 -t 2 -v
+
+                Example:
+
+                    $ passphrase.pl -l en -w 3 -t 2 -v
+                     9 626655 trephines
+                     9 255425 faultier
+                     4 253613 exostoses
+                    trephines faultier exostoses
+                     6 543425 scrupulous
+                    10 423641 niobiums
+                     8 353266 laptop
+                    scrupulous niobiums laptop
+
+    -help or -h or -?
+            Show this help
+
 ```
 
 ## Install
