@@ -27,25 +27,32 @@ GetOptions(\%options,
 );
 
 # Languaje paramters
-my %dic = ('es' => { 'initial' => 1,
-                     'pages'   => 2,
-                     'rolls'   => 6,
-                     'max'     => 100,
-                     'words'   => 4,
-                   },
-           'en' => { 'initial' => 4,
-                     'pages'   => 7,
-                     'rolls'   => 6,
-                     'max'     => 100,
-                     'words'   => 4,
-                   },
-           'special' => { 'initial' => 3,
-                          'pages'   => 1,
-                          'rolls'   => 2,
-                          'max'     => 10,
-                          'words'   => 1,
-                        }
-           );
+my %dic = (
+    # Spanish
+    'es' => {
+        'initial' => 1,
+        'pages'   => 2,
+        'rolls'   => 6,
+        'max'     => 100,
+        'words'   => 4,
+    },
+    # English
+    'en' => { 
+        'initial' => 4,
+        'pages'   => 7,
+        'rolls'   => 6,
+        'max'     => 100,
+        'words'   => 4,
+    },
+    # Special chars
+    'special' => {
+        'initial' => 3,
+        'pages'   => 1,
+        'rolls'   => 2,
+        'max'     => 10,
+        'words'   => 1,
+    }
+);
 
 my $languaje = 'es';
 if ( exists($dic{$options{'languaje'}}) ) {
@@ -115,11 +122,14 @@ else {
                 my $number = '';
 
                 # Choose the dictionary to use and alternate in each word
-                my $dic = irand($dic{$languaje}{pages}) + $dic{$languaje}{initial};
+                my $dic = $dic{$languaje}{initial};
+                if ( $dic{$languaje}{pages} > 1 ) {
+                    $dic = irand($dic{$languaje}{pages}) + $dic{$languaje}{initial};
+                }
 
                 # Roll the dice to generate the index
                 for ( my $x = 0; $x < $dic{$languaje}{rolls}; $x++ ) {
-                    $number .= irand($dic{$languaje}{rolls}) + 1;
+                    $number .= irand(6) + 1;
                 }
 
                 # Check cache to avoid repeat the same word on the passphrase
