@@ -26,10 +26,10 @@ if ($init_flag) {
     init_db();
 }
 
-my $SQL_Code = "select word from dictionary where dic = ? and dice_index = ?;";
+my $SQL_Code = "select word from dictionary where language = ? and page = ? and dice_index = ?;";
 my $sth_read = $dbh->prepare($SQL_Code);
 
-$SQL_Code = "insert into dictionary(dic, dice_index, word) values( ?, ?, ? );";
+$SQL_Code = "insert into dictionary(language, page, dice_index, word) values( ?, ?, ?, ? );";
 my $sth_insert = $dbh->prepare($SQL_Code);
 
 #-------------------------------------------#
@@ -39,13 +39,14 @@ sub init_db {
     print "Init DB\n";
     # Create lottery products Table
     $SQL_Code = "CREATE TABLE dictionary (
-            dic        integer not null,
+            language   text not null,
+            page       integer not null,
             dice_index text not null,
             word       text not null
         );";
     $dbh->do($SQL_Code);
     # Create index on products table
-    $SQL_Code = "CREATE UNIQUE INDEX un_dic_index on dictionary(dic, dice_index);";
+    $SQL_Code = "CREATE UNIQUE INDEX un_dic_index on dictionary(language, page, dice_index);";
     $dbh->do($SQL_Code);
 } # End sub init_db()
 
@@ -53,9 +54,9 @@ sub init_db {
 # Search if the record already exists  #
 #--------------------------------------#
 sub already_on_results {
-    my ($dic, $index) = @_;
+    my ($language, $page, $index) = @_;
     my $already = 0;
-    my $ret = $sth_read->execute($dic,"$index");
+    my $ret = $sth_read->execute("$language", $page, "$index");
     while (my $read_ref = $sth_read->fetchrow_hashref) {
         $already++;
     }
@@ -64,15 +65,15 @@ sub already_on_results {
 } # en sub _already_on_results()
 
 sub load_words {
-    my ($dic, $file) = @_;
+    my ($language, $page, $file) = @_;
     open(DIC, "<", "words/$file") or die;
     print "load $file...\n";
     while (<DIC>) {
         chomp;
         my ($index, $word) = split(/ /,$_);
         # insert the new record if not previously exists
-        unless( already_on_results($dic, "$index") ) {
-            $sth_insert->execute($dic,"$index","$word");
+        unless( already_on_results("$language", $page, "$index") ) {
+            $sth_insert->execute("$language", $page,"$index","$word");
         }
     }
     close(DIC);
@@ -82,16 +83,16 @@ sub load_words {
 # if not exists the db schema, creates and star a initial load of the words
 if ($init_flag) {
     # Load the words
-    load_words(1,'es_words_1.txt');
-    load_words(2,'es_words_2.txt');
-    load_words(3,'special_chars.txt');
-    load_words(4,'en_words_1.txt');
-    load_words(5,'en_words_2.txt');
-    load_words(6,'en_words_3.txt');
-    load_words(7,'en_words_4.txt');
-    load_words(8,'en_words_5.txt');
-    load_words(9,'en_words_6.txt');
-    load_words(10,'en_words_7.txt');
+    load_words('es',1,'es_words_1.txt');
+    load_words('es',2,'es_words_2.txt');
+    load_words('special',1,'special_chars.txt');
+    load_words('en',1,'en_words_1.txt');
+    load_words('en',2,'en_words_2.txt');
+    load_words('en',3,'en_words_3.txt');
+    load_words('en',4,'en_words_4.txt');
+    load_words('en',5,'en_words_5.txt');
+    load_words('en',6,'en_words_6.txt');
+    load_words('en',7,'en_words_7.txt');
     # clean up the DB
     $dbh->do('vacuum;');
     print "DB ready for use\n";

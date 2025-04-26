@@ -19,18 +19,17 @@ use Pod::Usage;     # Perl documentation for help
 # Command Line options
 my %options = ();
 GetOptions(\%options,
-           'languaje=s',
+           'language=s',
            'words=i',
            'times=i',
            'verbose',
            'help|?',
 );
 
-# Languaje paramters
+# Language paramters
 my %dic = (
     # Spanish
     'es' => {
-        'initial' => 1,
         'pages'   => 2,
         'rolls'   => 6,
         'max'     => 100,
@@ -38,7 +37,6 @@ my %dic = (
     },
     # English
     'en' => { 
-        'initial' => 4,
         'pages'   => 7,
         'rolls'   => 6,
         'max'     => 100,
@@ -46,7 +44,6 @@ my %dic = (
     },
     # Special chars
     'special' => {
-        'initial' => 3,
         'pages'   => 1,
         'rolls'   => 2,
         'max'     => 10,
@@ -54,22 +51,22 @@ my %dic = (
     }
 );
 
-my $languaje = 'es';
-if ( exists($dic{$options{'languaje'}}) ) {
-    $languaje = $options{'languaje'};
+my $language = 'es';
+if ( exists($dic{$options{'language'}}) ) {
+    $language = $options{'language'};
 }
 
 my $words = 1;
 if ( exists($options{'words'}) ) {
-    if ( $options{'words'} <= $dic{$languaje}{max} ) {
+    if ( $options{'words'} <= $dic{$language}{max} ) {
         $words = $options{'words'};
     }
     else {
-        $words = $dic{$languaje}{words};
+        $words = $dic{$language}{words};
     }
 }
 else {
-    $words = $dic{$languaje}{words};
+    $words = $dic{$language}{words};
 }
 
 my $times = 1;
@@ -98,14 +95,14 @@ else {
         $dbh->{PrintError} = 0; # Disable automatic  Error Handling
 
         # prepare query on advanced
-        my $SQL_Code = "select word from dictionary where dic = ? and dice_index = ?;";
+        my $SQL_Code = "select word from dictionary where language = ? and page = ? and dice_index = ?;";
         my $sth_read = $dbh->prepare($SQL_Code);
 
         # Search the word on the DB
         sub read_word {
-            my ($dic, $index) = @_;
+            my ($language, $page, $index) = @_;
             my $word = '';
-            my $ret = $sth_read->execute($dic,"$index");
+            my $ret = $sth_read->execute("$language", $page, "$index");
             while (my $read_ref = $sth_read->fetchrow_hashref) {
                 $word = $read_ref->{word};
             }
@@ -122,23 +119,23 @@ else {
                 my $number = '';
 
                 # Choose the dictionary to use and alternate in each word
-                my $dic = $dic{$languaje}{initial};
-                if ( $dic{$languaje}{pages} > 1 ) {
-                    $dic = irand($dic{$languaje}{pages}) + $dic{$languaje}{initial};
+                my $page = $dic{$language}{pages};
+                if ( $dic{$language}{pages} > 1 ) {
+                    $page = irand($dic{$language}{pages}) + 1;
                 }
 
                 # Roll the dice to generate the index
-                for ( my $x = 0; $x < $dic{$languaje}{rolls}; $x++ ) {
+                for ( my $x = 0; $x < $dic{$language}{rolls}; $x++ ) {
                     $number .= irand(6) + 1;
                 }
 
                 # Check cache to avoid repeat the same word on the passphrase
-                if ( !exists($cache{"$dic$number"}) ) {
-                    $cache{"$dic$number"} = 1;
+                if ( !exists($cache{"$language$page$number"}) ) {
+                    $cache{"$language$page$number"} = 1;
 
                     # search the word
-                    my $word = read_word($dic, "$number");
-                    print sprintf("%2s %6s %-20s\n",$dic, $number, $word) if ($options{'verbose'});
+                    my $word = read_word("$language", $page, "$number");
+                    print sprintf("%2s %6s %-20s\n",$page, $number, $word) if ($options{'verbose'});
                     $passphrase .= $word . ' ';
                 }
                 # if exists a word collision decrement the word count
@@ -168,7 +165,7 @@ melate.pl
 
 =head1 DESCRIPTION
 
-This program generate a passphrase based on languaje word list
+This program generate a passphrase based on language word list
 
 =head1 SYNOPSIS
 
@@ -178,11 +175,11 @@ passphrase.pl [options]
 
 =over 8
 
-=item B<-languaje or -l>
+=item B<-language or -l>
 
-The -languaje or -l option show the passphrase on the given languaje:
+The -language or -l option show the passphrase on the given language:
 
-    passphrase.pl -languaje es
+    passphrase.pl -language es
 
     or
 
@@ -201,7 +198,7 @@ The -languaje or -l option show the passphrase on the given languaje:
 
 generate the passphrase with number of words:
 
-    passphrase.pl -languaje en -words 5
+    passphrase.pl -language en -words 5
 
     or
 
@@ -212,13 +209,13 @@ generate the passphrase with number of words:
         $ passphrase.pl -l en -w 5
         interpolation stylelessness pussycats tythed typhlocele
 
-    The default value on spanish and english languajes is 4.
+    The default value on spanish and english languages is 4.
 
 =item B<-times or -t>
 
 Generate multiple passphrase
 
-    passphrase.pl -languaje en -words 5 -times 3
+    passphrase.pl -language en -words 5 -times 3
 
     or
 
@@ -237,7 +234,7 @@ Generate multiple passphrase
 
 show the generation and word selection process:
 
-    passphrase.pl -languaje en -words 3 -times 2 -verbose
+    passphrase.pl -language en -words 3 -times 2 -verbose
 
     or
 
