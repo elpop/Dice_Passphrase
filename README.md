@@ -6,7 +6,7 @@ Based on the idea from Arnold G. Reinhold ([https://theworld.com/~reinhold/dicew
 
 I create a list of words (in spanish) with the values of the roll of a six faces dice. The vaules are form 1 to 6 and represent the index of a word in the list. The file contains 46,656 words representing 6 values of six dice rolls.
 
-The spanish languaje has about 107,920 words, but if i put 7 values, we have more posible index than words (279,936 vs 107,920 spanish words). Then i adjust and choose 46,656 to match with the 6 digits index, but use two files to bring 93,312 possible words to the passphrase. odd and even words use the first and second list in alternate order.
+The spanish language has about 107,920 words, but if i put 7 values, we have more posible index than words (279,936 vs 107,920 spanish words). Then i adjust and choose 46,656 to match with the 6 digits index, but use two files to bring 93,312 possible words to the passphrase. odd and even words use the first and second list in alternate order.
 
 The english words are more than spanish, about 370,105 words. I reduce to a seven dice index files (46,656 words/file) to create a corpus of 326,592 posible words.
 
@@ -28,16 +28,16 @@ But i make a little program (passphrase.pl) to emulate the dice roll and generat
 ## Summary
 
 ```
-$ ./passphrase.pl -h
+$ passphrase.pl -help
 Usage:
     passphrase.pl [options]
 
 Options:
-    -languaje or -l
-            The -languaje or -l option show the passphrase on the given
-            languaje:
+    -language or -l
+            The -language or -l option show the passphrase on the given
+            language:
 
-                passphrase.pl -languaje es
+                passphrase.pl -language es
 
                 or
 
@@ -48,15 +48,14 @@ Options:
                     $ passphrase.pl -l es
                     allanabarrancos sochantre melgar prensero
 
-                The values can be "es" for espanish, "en" for english or
-                "special" to generate special random char.
+                The values can be "es" for espanish, "en" for english or "special" to generate special random char.
 
                 The default value is "es".
 
     -words or -w
             generate the passphrase with number of words:
 
-                passphrase.pl -languaje en -words 5
+                passphrase.pl -language en -words 5
 
                 or
 
@@ -67,12 +66,12 @@ Options:
                     $ passphrase.pl -l en -w 5
                     interpolation stylelessness pussycats tythed typhlocele
 
-                The default value on spanish and english languajes is 4.
+                The default value on spanish and english languages is 4.
 
     -times or -t
             Generate multiple passphrase
 
-                passphrase.pl -languaje en -words 5 -times 3
+                passphrase.pl -language en -words 5 -times 3
 
                 or
 
@@ -90,7 +89,7 @@ Options:
     -verbose or -v
             show the generation and word selection process:
 
-                passphrase.pl -languaje en -words 3 -times 2 -verbose
+                passphrase.pl -language en -words 3 -times 2 -verbose
 
                 or
 
@@ -110,7 +109,6 @@ Options:
 
     -help or -h or -?
             Show this help
-
 ```
 
 ## Install
