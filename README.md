@@ -148,19 +148,25 @@ Options:
     [DBD::SQLite](https://metacpan.org/pod/DBD::SQLite)
 
     [Math::Random::Secure](https://metacpan.org/pod/Math::Random::Secure)
+    
+    [Getopt::Long](https://metacpan.org/pod/Getopt::Long)
+    
+    [Pod::Usage](https://metacpan.org/pod/Pod::Usage)
+
 
     All the Perl Modules are available via [metacpan](https://metacpan.org) or install them via the "cpan" program in your system. Debian/Ubuntu and Fedora have packages for the required perl modules.
 
     for Fedora/Redhat:
 
     ```
-    sudo dnf install perl-DBI perl-DBD-SQLite perl-Math-Random-Secure
+    sudo dnf install perl-DBI perl-DBD-SQLite perl-Math-Random-Secure perl-Getopt-Long perl-Pod-Usage
     ```
 
     for Debian/Ubuntu:
 
     ```
     sudo apt-get install libdbi-perl libdbd-sqlite3-perl libmath-random-secure-perl
+    sudo cpan -i Getopt::Long Pod::Usage
     ```
 
     On Mac OS:
@@ -175,7 +181,7 @@ Options:
     Install with CPAN:
 
     ```
-    sudo cpan -i DBI DBD::SQLite Math::Random::Secure
+    sudo cpan -i DBI DBD::SQLite Math::Random::Secure Getopt::Long Pod::Usage
     ```
 
 4. Put it on your search path
