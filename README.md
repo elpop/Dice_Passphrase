@@ -189,8 +189,18 @@ Options:
     ```
     sudo cp passphrase.pl /usr/local/bin/.
     ```
+5. Copy the passphrase sqlite db
 
-## Initial run
+    ```
+    cd db
+    gzip -d passphrase.db.gz
+    mkdir ~/.passphrase
+    cp passphrase.db ~/.passpharse/.
+    ```
+
+Now, you can use the program :)
+
+## DB Generation (in case you want to do it)
 
 The **db\_load\_words.pl** program create a hidden directory ".passphrase" in your HOME path.
 
@@ -199,6 +209,8 @@ Into the directory create the sqlite DB called "passphrase.db".
 when you run it for the first time you see the following:
 
 ```
+$ rm -rf ~/.passphrase
+
 $ ./db_load_words.pl 
 Init DB
 load es_words_1.txt...
@@ -227,17 +239,6 @@ DB ready for use
 The directory **words** must be in the same path of the **db\_load\_words.pl** program.
 
 The full load of the data can take about 17 minutes or less, depending your computer and disk.
-
-**IMPORTANT** If you are on a hurry, you can take the sqlite backup and put directly on the working dir:
-
-```
-cd db
-gzip -d passphrase.db.gz
-mkdir ~/.passphrase
-cp passphrase.db ~/.passpharse/.
-```
-
-Now, you can use the program :)
 
 ## Words reference
 
