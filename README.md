@@ -25,6 +25,12 @@ Each number in the index, is the result of a dice roll, to obtain the index you 
 
 But i make a little program (passphrase.pl) to emulate the dice roll and generate the passphrase.
 
+## Update
+
+On Sat Apr 26, i change the schema of the sqlite db to permit support new future languages.
+
+If you have a DB prior this date, you must [`re-install the db`](#Copy the passphrase sqlite db) or [`re-create`](#DB Generation) it.
+
 ## Summary
 
 ```
@@ -116,13 +122,13 @@ Options:
 
 ## Install
 
-1. Download file
+1. ##### Download file
 
     ```
     git clone https://github.com/elpop/Dice_Spanish_Passphrase.git
     ```
 
-2. Install SQLite:
+2. ##### Install SQLite:
 
    The programs use SQLite. This is available for Mac OS and the most popular Linux distros.
 
@@ -142,7 +148,7 @@ Options:
 
     SQLite is available by default.
 
-3. Perl Dependencies
+3. ##### Perl Dependencies
 
     [DBI](https://metacpan.org/pod/DBI)
 
@@ -185,14 +191,14 @@ Options:
     sudo cpan -i DBI DBD::SQLite Math::Random::Secure Getopt::Long Pod::Usage
     ```
 
-4. Put it on your search path
+4. ##### Put it on your search path
 
     Copy the passphrase.pl program somewhere in your search path:
 
     ```
     sudo cp passphrase.pl /usr/local/bin/.
     ```
-5. Copy the passphrase sqlite db
+5. ##### Copy the passphrase sqlite db
 
     ```
     cd db
@@ -203,9 +209,9 @@ Options:
 
 Now, you can use the program :)
 
-## DB Generation (in case you want to do it)
+## DB Generation
 
-The **db\_load\_words.pl** program create a hidden directory ".passphrase" in your HOME path.
+In case you want to do it. The **db\_load\_words.pl** program create a hidden directory ".passphrase" in your HOME path.
 
 Into the directory create the sqlite DB called "passphrase.db".
 
@@ -255,7 +261,7 @@ The file **english_words** has 370,105 words.
 
 ## Author
 
-   Fernando Romo (pop@cofradia.org)
+   Fernando Romo <pop@cofradia.org>
 
 ## License
 
