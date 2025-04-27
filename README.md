@@ -29,7 +29,7 @@ But i make a little program (passphrase.pl) to emulate the dice roll and generat
 
 On Sat Apr 26, i change the schema of the sqlite db to permit support new future languages.
 
-If you have a DB prior this date, you must [`re-install the db`](#Copy the passphrase sqlite db) or [`re-create`](#DB Generation) it.
+If you have a DB prior this date, you must [re-install the db](#Copy the passphrase sqlite db) or [re-create](#DB Generation) it.
 
 ## Summary
 
