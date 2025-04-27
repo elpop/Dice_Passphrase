@@ -1,5 +1,11 @@
 # Spanish/English passphrase generator
 
+## Update Notice
+
+On Sat Apr 26, i change the schema of the sqlite db to permit support new future languages.
+
+If you have a DB prior this date, you must [copy again the db](#Copy-the-passphrase-sqlite-db) or [re-create](#DB-Generation) it.
+
 ## Description
 
 Based on the idea from Arnold G. Reinhold ([https://theworld.com/~reinhold/diceware.html](https://theworld.com/~reinhold/diceware.html)), to choose random words ussing a dice to create a really random passphrase.
@@ -24,12 +30,6 @@ For example:
 Each number in the index, is the result of a dice roll, to obtain the index you must roll the dice six times peer word, if you want a four word passphrase, you need to roll the dice 24 times.
 
 But i make a little program (passphrase.pl) to emulate the dice roll and generate the passphrase.
-
-## Update
-
-On Sat Apr 26, i change the schema of the sqlite db to permit support new future languages.
-
-If you have a DB prior this date, you must [copy againg the db](#Copy-the-passphrase-sqlite-db) or [re-create](#DB-Generation) it.
 
 ## Summary
 
