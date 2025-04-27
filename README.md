@@ -43,14 +43,15 @@ Options:
 
                 passphrase.pl -l es
 
-                Example:
+            Example:
 
-                    $ passphrase.pl -l es
-                    allanabarrancos sochantre melgar prensero
+                $ passphrase.pl -l es
+                allanabarrancos sochantre melgar prensero
 
-                The values can be "es" for espanish, "en" for english or "special" to generate special random char.
+            The values can be "es" for espanish, "en" for english or
+            "special" to generate special random char.
 
-                The default value is "es".
+            The default value is "es".
 
     -words or -w
             generate the passphrase with number of words:
@@ -61,12 +62,12 @@ Options:
 
                 passphrase.pl -l en -w 5
 
-                Example:
+            Example:
 
-                    $ passphrase.pl -l en -w 5
-                    interpolation stylelessness pussycats tythed typhlocele
+                $ passphrase.pl -l en -w 5
+                interpolation stylelessness pussycats tythed typhlocele
 
-                The default value on spanish and english languages is 4.
+            The default value on spanish and english languages is 4.
 
     -times or -t
             Generate multiple passphrase
@@ -77,14 +78,14 @@ Options:
 
                 passphrase.pl -l en -w 5 -t 3
 
-                Example:
+            Example:
 
-                    $ passphrase.pl -l en -w 5 -t 3
-                    stinkstone doeskins colorcaster stir chiricahua
-                    overbulk doughtiness myoedema dallyingly inequidistant
-                    lollops defrayers carcinomas experimentor fligger
+                $ passphrase.pl -l en -w 5 -t 3
+                stinkstone doeskins colorcaster stir chiricahua
+                overbulk doughtiness myoedema dallyingly inequidistant
+                lollops defrayers carcinomas experimentor fligger
 
-                The Default is 1 and the max value is 1,000.
+            The Default is 1 and the max value is 1,000.
 
     -verbose or -v
             show the generation and word selection process:
@@ -95,19 +96,19 @@ Options:
 
                 passphrase.pl -l en -w 3 -t 2 -v
 
-                Example:
+            Example:
 
-                    $ passphrase.pl -l en -w 3 -t 2 -v
-                    Page Index  Word
-                      5  656323 verricule           
-                      2  534155 rightish            
-                      7  431225 nonpoet             
-                    verricule rightish nonpoet 
-                    Page Index  Word
-                      7  122164 ancylopod           
-                      5  442464 overdeal            
-                      4  353135 landlordly          
-                    ancylopod overdeal landlordly
+                $ passphrase.pl -l en -w 3 -t 2 -v
+                Page Index  Word
+                  5  656323 verricule           
+                  2  534155 rightish            
+                  7  431225 nonpoet             
+                verricule rightish nonpoet 
+                Page Index  Word
+                  7  122164 ancylopod           
+                  5  442464 overdeal            
+                  4  353135 landlordly          
+                ancylopod overdeal landlordly
 
     -help or -h or -?
             Show this help
