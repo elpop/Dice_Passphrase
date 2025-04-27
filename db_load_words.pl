@@ -1,12 +1,16 @@
 #!/usr/bin/perl
+#===================================================================#
+# Program => db_load_words.pl           (In Perl 5.0) version 1.0.2 #
+#===================================================================#
+# Autor         => Fernando "El Pop" Romo        (pop@cofradia.org) #
+# Creation date => 22/apr/2025                                      #
+#-------------------------------------------------------------------#
+# Info => load the words into sqlite db to make a Passphrase.       #
+#-------------------------------------------------------------------#
+#        This code are released under the GPL 3.0 License.          #
+#===================================================================#
 use strict;
 use DBI;            # Interface to Database
-
-my $words = $ARGV[0];
-$words = 4 unless($words);
-
-my $passphrase = '';
-my %cache = ();
 
 my $init_flag = 0;
 
@@ -26,6 +30,7 @@ if ($init_flag) {
     init_db();
 }
 
+# Let ready the queries for fast execution
 my $SQL_Code = "select word from dictionary where language = ? and page = ? and dice_index = ?;";
 my $sth_read = $dbh->prepare($SQL_Code);
 
@@ -62,8 +67,11 @@ sub already_on_results {
     }
     $sth_read->finish();
     return $already
-} # en sub _already_on_results()
+} # End sub _already_on_results()
 
+#----------------------------------------#
+# Read the words file and insert into DB #
+#----------------------------------------#
 sub load_words {
     my ($language, $page, $file) = @_;
     open(DIC, "<", "words/$file") or die;
@@ -78,14 +86,20 @@ sub load_words {
     }
     close(DIC);
     print "$file loaded!\n";
-}
+} # End load_words()
 
-# if not exists the db schema, creates and star a initial load of the words
+#-----------#
+# Main body #
+#-----------#
+
+# Load the words
 if ($init_flag) {
-    # Load the words
+    # Spanish
     load_words('es',1,'es_words_1.txt');
     load_words('es',2,'es_words_2.txt');
+    # Special characters
     load_words('special',1,'special_chars.txt');
+    # English
     load_words('en',1,'en_words_1.txt');
     load_words('en',2,'en_words_2.txt');
     load_words('en',3,'en_words_3.txt');
@@ -98,5 +112,6 @@ if ($init_flag) {
     print "DB ready for use\n";
 }
 
+# Close DB connection
 $dbh->disconnect;
 
