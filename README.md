@@ -2,9 +2,9 @@
 
 ## Update Notice
 
-On Sat Apr 26, i change the schema of the sqlite db to permit support new future languages.
+* Mon Apr 28 2025, the table name change his name from **dictionary** to **dice_passphrase** for use on PostgreSQL DB as well. you must [copy again the db](#Copy-the-passphrase-sqlite-db) or [re-create](#DB-Generation) it.
 
-If you have a DB prior this date, you must [copy again the db](#Copy-the-passphrase-sqlite-db) or [re-create](#DB-Generation) it.
+* Sat Apr 26 2025, i change the schema of the sqlite db to permit support new future languages. If you have a DB prior this date, you must [copy again the db](#Copy-the-passphrase-sqlite-db) or [re-create](#DB-Generation) it.
 
 ## Description
 
