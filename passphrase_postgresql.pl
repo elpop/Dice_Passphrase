@@ -16,7 +16,6 @@ use DBI;                            # Interface to Database
 use Math::Random::Secure qw(irand); #Cryptographically-secure replacement for rand()
 use Getopt::Long;                   # Handle the arguments passed to the program
 use Pod::Usage;     # Perl documentation for help
-use Config::Simple;
 
 # Postgres SQL connection parms
 my $db_name = "dbi:Pg:dbname=DB_NAME;host=127.0.0.1";

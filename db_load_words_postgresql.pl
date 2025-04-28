@@ -12,7 +12,6 @@
 use strict;
 use utf8;
 use DBI;            # Interface to Database
-use Config::Simple;
 
 # Postgres SQL connection parms
 my $db_name = "dbi:Pg:dbname=DB_NAME;host=127.0.0.1";
