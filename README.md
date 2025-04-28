@@ -2,9 +2,9 @@
 
 ## Update Notice
 
-* Mon Apr 28 2025, the table name change his name from **dictionary** to **dice_passphrase** for use on PostgreSQL DB as well. you must [copy again the db](#Copy-the-passphrase-sqlite-db) or [re-create](#DB-Generation) it.
+* Mon Apr 28 2025, the table name change his name from **dictionary** to **dice_passphrase** for use on PostgreSQL DB as well. you must [copy again the db](#Copy-the-passphrase-db) or [re-create](#DB-Generation) it.
 
-* Sat Apr 26 2025, i change the schema of the sqlite db to permit support new future languages. If you have a DB prior this date, you must [copy again the db](#Copy-the-passphrase-sqlite-db) or [re-create](#DB-Generation) it.
+* Sat Apr 26 2025, i change the schema of the sqlite db to permit support new future languages. If you have a DB prior this date, you must [copy again the db](#Copy-the-passphrase-db) or [re-create](#DB-Generation) it.
 
 ## Description
 
@@ -122,13 +122,15 @@ Options:
 
 ## Install
 
-1. ##### Download file
+1. #### Download file
 
     ```
     git clone https://github.com/elpop/Dice_Spanish_Passphrase.git
     ```
 
-2. ##### Install SQLite:
+2. #### Install DB
+   
+   ##### Sqlite
 
    The programs use SQLite. This is available for Mac OS and the most popular Linux distros.
 
@@ -148,11 +150,17 @@ Options:
 
     SQLite is available by default.
 
-3. ##### Perl Dependencies
+    ##### PostgreSQL
+    
+    Follow the install instructions of the [postgresql.org](https://www.postgresql.org/download/) page.
+    
+3. #### Perl Dependencies
 
     [DBI](https://metacpan.org/pod/DBI)
 
     [DBD::SQLite](https://metacpan.org/pod/DBD::SQLite)
+
+    [DBD::Pg](https://metacpan.org/pod/DBD::Pg) if you use PostgreSQL database engine.
 
     [Math::Random::Secure](https://metacpan.org/pod/Math::Random::Secure)
     
@@ -163,20 +171,32 @@ Options:
 
     All the Perl Modules are available via [metacpan](https://metacpan.org) or install them via the "cpan" program in your system. Debian/Ubuntu and Fedora have packages for the required perl modules.
 
-    for Fedora/Redhat:
+    ##### For Fedora/Redhat:
 
     ```
     sudo dnf install perl-DBI perl-DBD-SQLite perl-Math-Random-Secure perl-Getopt-Long perl-Pod-Usage
     ```
+    
+    If you use PostgreSQL:
+    
+    ```
+    sudo dnf install perl-DBD-Pg
+    ```
 
-    for Debian/Ubuntu:
+    ##### For Debian/Ubuntu:
 
     ```
     sudo apt-get install libdbi-perl libdbd-sqlite3-perl libmath-random-secure-perl
     sudo cpan -i Getopt::Long Pod::Usage
     ```
 
-    On Mac OS:
+    If you use PostgreSQL:
+    
+    ```
+    sudo apt-get install libdbd-pg-perl
+    ```
+
+    ##### On Mac OS:
 
     To compile some Perl modules, you need to install the
     Xcode Command Line Tools:
@@ -190,26 +210,63 @@ Options:
     ```
     sudo cpan -i DBI DBD::SQLite Math::Random::Secure Getopt::Long Pod::Usage
     ```
-
-4. ##### Put it on your search path
+    
+    If you use PostgreSQL:
+    
+    ```
+    sudo cpan -i DBD::Pg
+    ```
+    
+4. #### Put it on your search path
 
     Copy the passphrase.pl program somewhere in your search path:
+    
+    ##### Sqlite
 
     ```
     sudo cp passphrase.pl /usr/local/bin/.
     ```
-5. ##### Copy the passphrase sqlite db
+    
+    ##### PostgreSQL
 
+    The program **passphrase\_postgresql.pl** has 3 parameter you need to edit to match your DB access credentias:
+    
+    ```
+    # Postgres SQL connection parms
+    my $db_name = "dbi:Pg:dbname=DB_NAME;host=127.0.0.1";
+    my $db_user = "DB_USER";
+    my $db_pass = "DB_PASS";
+    ```
+    
+    Then:
+
+    ```
+    sudo cp passphrase_postgresql.pl /usr/local/bin/passphrase.pl
+    ```
+
+5. #### Copy the passphrase db
+
+    ##### Sqlite
+    
     ```
     cd db
     gzip -d passphrase.db.gz
     mkdir ~/.passphrase
     cp passphrase.db ~/.passpharse/.
     ```
+    
+    ##### PostgreSQL
+    
+    ```
+    cd db
+    zcat dice_passphrase.sql.gz | psql YOUR_DB YOUR_DB_USER
+    ```
 
 Now, you can use the program :)
 
 ## DB Generation
+
+### Sqlite
 
 In case you want to do it. The **db\_load\_words.pl** program create a hidden directory ".passphrase" in your HOME path.
 
@@ -248,6 +305,21 @@ DB ready for use
 The directory **words** must be in the same path of the **db\_load\_words.pl** program.
 
 The full load of the data can take about 17 minutes or less, depending your computer and disk.
+
+### PostgreSQL
+
+The **db\_load\_word\_postgresql.pl** program create table wit name "dice_passphrase" in your database.
+
+The program has 3 parameter you need to edit to match your DB access credentias:
+
+```
+# Postgres SQL connection parms
+my $db_name = "dbi:Pg:dbname=DB_NAME;host=127.0.0.1";
+my $db_user = "DB_USER";
+my $db_pass = "DB_PASS";
+```
+
+Then, run the **db\_load\_word\_postgresql.pl** program.
 
 ## Words reference
 
