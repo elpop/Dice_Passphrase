@@ -93,72 +93,64 @@ if ($options{'help'}) {
     pod2usage(2);
 }
 else {
-    my $work_dir = $ENV{'HOME'} . '/.passphrase'; # keys directory
-    # if not exists the work directory, creates and put the init_flag on
-    if (-e "$work_dir/passphrase.db") {
+    # Connect to the Database Server
+    my $dbh = DBI->connect($db_name, $db_user, $db_pass);
+    $dbh->{PrintError} = 0; # Disable automatic  Error Handling
 
-        # Connect to the Database Server
-        my $dbh = DBI->connect($db_name, $db_user, $db_pass);
-        $dbh->{PrintError} = 0; # Disable automatic  Error Handling
+    # prepare query on advanced
+    my $SQL_Code = "select word from dice_passphrase where language = ? and page = ? and dice_index = ?;";
+    my $sth_read = $dbh->prepare($SQL_Code);
 
-        # prepare query on advanced
-        my $SQL_Code = "select word from dice_passphrase where language = ? and page = ? and dice_index = ?;";
-        my $sth_read = $dbh->prepare($SQL_Code);
-
-        # Search the word on the DB
-        sub read_word {
-            my ($language, $page, $index) = @_;
-            my $word = '';
-            my $ret = $sth_read->execute("$language", $page, "$index");
-            while (my $read_ref = $sth_read->fetchrow_hashref) {
-                $word = $read_ref->{word};
-		utf8::encode($word);
-            }
-            $sth_read->finish();
-            return $word;
-        } # en sub read_word()
-
-        # loop the number of passphrases to generate
-        for ( my $t = 1; $t <= $times; $t++ ) {
-            # loop the number of words to generate the passphrase
-            my $passphrase = '';
-            my %cache = ();
-            print "Page Index  Word\n" if ($options{'verbose'});
-            for ( my $i = 0; $i < $words; $i++ ) {
-                my $number = '';
-
-                # Choose the dictionary to use and alternate in each word
-                my $page = $dic{$language}{pages};
-                if ( $dic{$language}{pages} > 1 ) {
-                    $page = irand($dic{$language}{pages}) + 1;
-                }
-
-                # Roll the dice to generate the index
-                for ( my $x = 0; $x < $dic{$language}{rolls}; $x++ ) {
-                    $number .= irand(6) + 1;
-                }
-
-                # Check cache to avoid repeat the same word on the passphrase
-                if ( !exists($cache{"$language$page$number"}) ) {
-                    $cache{"$language$page$number"} = 1;
-
-                    # search the word
-                    my $word = read_word("$language", $page, "$number");
-                    print sprintf(" %2s  %6s %-20s\n",$page, $number, $word) if ($options{'verbose'});
-                    $passphrase .= $word . ' ';
-                }
-                # if exists a word collision decrement the word count
-                else {
-                    $i--;
-                }
-            }
-            print "$passphrase\n";
+    # Search the word on the DB
+    sub read_word {
+        my ($language, $page, $index) = @_;
+        my $word = '';
+        my $ret = $sth_read->execute("$language", $page, "$index");
+        while (my $read_ref = $sth_read->fetchrow_hashref) {
+            $word = $read_ref->{word};
+            utf8::encode($word);
         }
-        $dbh->disconnect;
+        $sth_read->finish();
+        return $word;
+    } # en sub read_word()
+
+    # loop the number of passphrases to generate
+    for ( my $t = 1; $t <= $times; $t++ ) {
+        # loop the number of words to generate the passphrase
+        my $passphrase = '';
+        my %cache = ();
+        print "Page Index  Word\n" if ($options{'verbose'});
+        for ( my $i = 0; $i < $words; $i++ ) {
+            my $number = '';
+
+            # Choose the dictionary to use and alternate in each word
+            my $page = $dic{$language}{pages};
+            if ( $dic{$language}{pages} > 1 ) {
+                $page = irand($dic{$language}{pages}) + 1;
+            }
+
+            # Roll the dice to generate the index
+            for ( my $x = 0; $x < $dic{$language}{rolls}; $x++ ) {
+                $number .= irand(6) + 1;
+            }
+
+            # Check cache to avoid repeat the same word on the passphrase
+            if ( !exists($cache{"$language$page$number"}) ) {
+                $cache{"$language$page$number"} = 1;
+
+                # search the word
+                my $word = read_word("$language", $page, "$number");
+                print sprintf(" %2s  %6s %-20s\n",$page, $number, $word) if ($options{'verbose'});
+                $passphrase .= $word . ' ';
+            }
+            # if exists a word collision decrement the word count
+            else {
+                $i--;
+            }
+        }
+        print "$passphrase\n";
     }
-    else {
-        print "No Passphrase words db available\nLoad the words lits wit db_load_words.pl\n";
-    }
+    $dbh->disconnect;
 }
 
 # End Main Body #
@@ -253,15 +245,15 @@ Example:
 
     $ passphrase.pl -l en -w 3 -t 2 -v
     Page Index  Word
-      5  656323 verricule           
-      2  534155 rightish            
-      7  431225 nonpoet             
-    verricule rightish nonpoet 
+      5  656323 verricule
+      2  534155 rightish
+      7  431225 nonpoet
+    verricule rightish nonpoet
     Page Index  Word
-      7  122164 ancylopod           
-      5  442464 overdeal            
-      4  353135 landlordly          
-    ancylopod overdeal landlordly 
+      7  122164 ancylopod
+      5  442464 overdeal
+      4  353135 landlordly
+    ancylopod overdeal landlordly
 
 =item B<-help or -h or -?>
 
