@@ -95,7 +95,7 @@ else {
         $dbh->{PrintError} = 0; # Disable automatic  Error Handling
 
         # prepare query on advanced
-        my $SQL_Code = "select word from dictionary where language = ? and page = ? and dice_index = ?;";
+        my $SQL_Code = "select word from dice_passphrase where language = ? and page = ? and dice_index = ?;";
         my $sth_read = $dbh->prepare($SQL_Code);
 
         # Search the word on the DB

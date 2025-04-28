@@ -31,10 +31,10 @@ if ($init_flag) {
 }
 
 # Let ready the queries for fast execution
-my $SQL_Code = "select word from dictionary where language = ? and page = ? and dice_index = ?;";
+my $SQL_Code = "select word from dice_passphrase where language = ? and page = ? and dice_index = ?;";
 my $sth_read = $dbh->prepare($SQL_Code);
 
-$SQL_Code = "insert into dictionary(language, page, dice_index, word) values( ?, ?, ?, ? );";
+$SQL_Code = "insert into dice_passphrase(language, page, dice_index, word) values( ?, ?, ?, ? );";
 my $sth_insert = $dbh->prepare($SQL_Code);
 
 #-------------------------------------------#
@@ -43,7 +43,7 @@ my $sth_insert = $dbh->prepare($SQL_Code);
 sub init_db {
     print "Init DB\n";
     # Create lottery products Table
-    $SQL_Code = "CREATE TABLE dictionary (
+    $SQL_Code = "CREATE TABLE dice_passphrase (
             language   text not null,
             page       integer not null,
             dice_index text not null,
@@ -51,7 +51,7 @@ sub init_db {
         );";
     $dbh->do($SQL_Code);
     # Create index on products table
-    $SQL_Code = "CREATE UNIQUE INDEX un_dic_index on dictionary(language, page, dice_index);";
+    $SQL_Code = "CREATE UNIQUE INDEX un_dice_passphrase_index on dice_passphrase(language, page, dice_index);";
     $dbh->do($SQL_Code);
 } # End sub init_db()
 
