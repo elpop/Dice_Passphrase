@@ -149,7 +149,7 @@ else {
         $dbh->disconnect;
     }
     else {
-        print "No Passphrase words db available\nLoad the words lits wit db_load_words.pl\n";
+        print "No Passphrase words db available\nLoad the words list with db_load_words.pl\n";
     }
 }
 
