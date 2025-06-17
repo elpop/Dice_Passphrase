@@ -125,7 +125,7 @@ Options:
 1. #### Download file
 
     ```
-    git clone https://github.com/elpop/Dice_Spanish_Passphrase.git
+    git clone https://github.com/elpop/Dice_Passphrase.git
     ```
 
 2. #### Install DB
