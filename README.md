@@ -252,7 +252,7 @@ Options:
     cd db
     gzip -d passphrase.db.gz
     mkdir ~/.passphrase
-    cp passphrase.db ~/.passpharse/.
+    cp passphrase.db ~/.passphrase/.
     ```
     
     ##### PostgreSQL
