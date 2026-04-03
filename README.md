@@ -1,4 +1,4 @@
-# Spanish/English passphrase generator
+# Spanish/English/French/Portugese passphrase generator
 
 ## Update Notice
 
