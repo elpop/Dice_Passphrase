@@ -10,7 +10,7 @@
 
 Based on the idea from Arnold G. Reinhold ([https://theworld.com/~reinhold/diceware.html](https://theworld.com/~reinhold/diceware.html)), to choose random words ussing a dice to create a really random passphrase.
 
-I create a list of words (in spanish) with the values of the roll of a six faces dice. The vaules are form 1 to 6 and represent the index of a word in the list. The file contains 46,656 words representing 6 values of six dice rolls.
+I create a list of words (in spanish) with the values of the roll of a six faces dice. The vaules are from 1 to 6 and represent the index of a word in the list. The file contains 46,656 words representing 6 values of six dice rolls.
 
 The spanish language has about 107,920 words, but if i put 7 values, we have more posible index than words (279,936 vs 107,920 spanish words). Then i adjust and choose 46,656 to match with the 6 digits index, but use two files to bring 93,312 possible words to the passphrase. odd and even words use the first and second list in alternate order.
 
