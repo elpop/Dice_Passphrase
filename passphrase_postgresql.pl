@@ -204,7 +204,8 @@ Example:
     $ passphrase.pl -l es
     allanabarrancos sochantre melgar prensero
 
-The values can be "es" for espanish, "en" for english, "fr" for french, "pt" for portugese or "special" to generate special random char.
+The values can be "es" for espanish, "en" for english, "fr" for french,
+"pt" for portugese or "special" to generate special random char.
 
 The default value is "es".
 

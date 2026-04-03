@@ -2,6 +2,8 @@
 
 ## Update Notice
 
+* Thu Apr 2 2026, Add support for French and Portugese languages. Add More words to the English and Spanish database.
+
 * Mon Apr 28 2025, the table name change his name from **dictionary** to **dice_passphrase** for use on PostgreSQL DB as well. you must [copy again the db](#Copy-the-passphrase-db) or [re-create](#DB-Generation) it.
 
 * Sat Apr 26 2025, i change the schema of the sqlite db to permit support new future languages. If you have a DB prior this date, you must [copy again the db](#Copy-the-passphrase-db) or [re-create](#DB-Generation) it.
@@ -54,8 +56,8 @@ Options:
                 $ passphrase.pl -l es
                 allanabarrancos sochantre melgar prensero
 
-            The values can be "es" for espanish, "en" for english or
-            "special" to generate special random char.
+            The values can be "es" for espanish, "en" for english, "fr" for french,
+            "pt" for portugese or "special" to generate special random char.
 
             The default value is "es".
 
