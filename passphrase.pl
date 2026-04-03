@@ -30,16 +30,30 @@ GetOptions(\%options,
 my %dic = (
     # Spanish
     'es' => {
-        'pages'   => 2,
+        'pages'   => 13,
         'rolls'   => 6,
-        'max'     => 100,
+        'max'     => 50,
         'words'   => 4,
     },
     # English
     'en' => {
-        'pages'   => 7,
+        'pages'   => 9,
         'rolls'   => 6,
-        'max'     => 100,
+        'max'     => 50,
+        'words'   => 4,
+    },
+    # French
+    'fr' => {
+        'pages'   => 6,
+        'rolls'   => 6,
+        'max'     => 50,
+        'words'   => 4,
+    },
+    # Portuguese
+    'pt' => {
+        'pages'   => 5,
+        'rolls'   => 6,
+        'max'     => 50,
         'words'   => 4,
     },
     # Special chars
@@ -136,7 +150,7 @@ else {
 
                     # search the word
                     my $word = read_word("$language", $page, "$number");
-                    print sprintf(" %2s  %6s %-20s\n",$page, $number, $word) if ($options{'verbose'});
+                    print sprintf(" %2s  %6s %-30s\n",$page, $number, $word) if ($options{'verbose'});
                     $passphrase .= $word . ' ';
                 }
                 # if exists a word collision decrement the word count

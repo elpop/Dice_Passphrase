@@ -36,14 +36,28 @@ GetOptions(\%options,
 my %dic = (
     # Spanish
     'es' => {
-        'pages'   => 2,
+        'pages'   => 13,
         'rolls'   => 6,
         'max'     => 100,
         'words'   => 4,
     },
     # English
     'en' => {
-        'pages'   => 7,
+        'pages'   => 9,
+        'rolls'   => 6,
+        'max'     => 100,
+        'words'   => 4,
+    },
+    # French
+    'fr' => {
+        'pages'   => 6,
+        'rolls'   => 6,
+        'max'     => 100,
+        'words'   => 4,
+    },
+    # Portuguese
+    'pt' => {
+        'pages'   => 5,
         'rolls'   => 6,
         'max'     => 100,
         'words'   => 4,
@@ -190,7 +204,7 @@ Example:
     $ passphrase.pl -l es
     allanabarrancos sochantre melgar prensero
 
-The values can be "es" for espanish, "en" for english or "special" to generate special random char.
+The values can be "es" for espanish, "en" for english, "fr" for french, "pt" for portugese or "special" to generate special random char.
 
 The default value is "es".
 
