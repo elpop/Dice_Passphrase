@@ -92,18 +92,45 @@ sub load_words {
 # Load the words
 
 # Spanish
-load_words('es',1,'es_words_1.txt');
-load_words('es',2,'es_words_2.txt');
+load_words('es',1,'es_dic_01.txt');
+load_words('es',2,'es_dic_02.txt');
+load_words('es',3,'es_dic_03.txt');
+load_words('es',4,'es_dic_04.txt');
+load_words('es',5,'es_dic_05.txt');
+load_words('es',6,'es_dic_06.txt');
+load_words('es',7,'es_dic_07.txt');
+load_words('es',8,'es_dic_08.txt');
+load_words('es',9,'es_dic_09.txt');
+load_words('es',10,'es_dic_10.txt');
+load_words('es',11,'es_dic_11.txt');
+load_words('es',12,'es_dic_12.txt');
+load_words('es',13,'es_dic_13.txt');
+# English
+load_words('en',1,'en_dic_01.txt');
+load_words('en',2,'en_dic_02.txt');
+load_words('en',3,'en_dic_03.txt');
+load_words('en',4,'en_dic_04.txt');
+load_words('en',5,'en_dic_05.txt');
+load_words('en',6,'en_dic_06.txt');
+load_words('en',7,'en_dic_07.txt');
+load_words('en',8,'en_dic_08.txt');
+load_words('en',9,'en_dic_09.txt');
+# French
+load_words('fr',1,'fr_dic_01.txt');
+load_words('fr',2,'fr_dic_02.txt');
+load_words('fr',3,'fr_dic_03.txt');
+load_words('fr',4,'fr_dic_04.txt');
+load_words('fr',5,'fr_dic_05.txt');
+load_words('fr',6,'fr_dic_06.txt');
+# Portuguese
+load_words('pt',1,'pt_dic_01.txt');
+load_words('pt',2,'pt_dic_02.txt');
+load_words('pt',3,'pt_dic_03.txt');
+load_words('pt',4,'pt_dic_04.txt');
+load_words('pt',5,'pt_dic_05.txt');
 # Special characters
 load_words('special',1,'special_chars.txt');
-# English
-load_words('en',1,'en_words_1.txt');
-load_words('en',2,'en_words_2.txt');
-load_words('en',3,'en_words_3.txt');
-load_words('en',4,'en_words_4.txt');
-load_words('en',5,'en_words_5.txt');
-load_words('en',6,'en_words_6.txt');
-load_words('en',7,'en_words_7.txt');
+    
 # clean up the DB
 $dbh->do('vacuum;');
 print "DB ready for use\n";
