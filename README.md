@@ -325,13 +325,35 @@ Then, run the **db\_load\_word\_postgresql.pl** program.
 
 ## Words reference
 
-The source of the Spanish words come from [https://github.com/JorgeDuenasLerin/diccionario-espanol-txt](https://github.com/JorgeDuenasLerin/diccionario-espanol-txt)
+The source of the words are the following:
 
-The file **spanish_words.txt** has the original 107,920 words for your future use o for  create a random subset.
+### French
 
-The source of the English words come from [https://github.com/dwyl/english-words](https://github.com/dwyl/english-words)
+https://raw.githubusercontent.com/lorenbrichter/Words/master/Words/fr.txt
+https://cgit.freedesktop.org/libreoffice/dictionaries/plain/fr_FR/fr_FR.dic
+https://raw.githubusercontent.com/hbenbel/French-Dictionary/master/dictionary/dictionary.txt
+https://raw.githubusercontent.com/chrplr/openlexicon/master/datasets-info/Liste-de-mots-francais-Gutenberg/liste.de.mots.francais.frgut.txt
 
-The file **english_words** has 370,105 words.
+### Portugese
+
+https://raw.githubusercontent.com/pythonprobr/palavras/master/palavras.txt
+https://raw.githubusercontent.com/lorenbrichter/Words/master/Words/pt.txt
+https://raw.githubusercontent.com/thoughtworks/dadoware/master/fontes/com_acentos.txt
+https://cgit.freedesktop.org/libreoffice/dictionaries/plain/pt_BR/pt_BR.dic
+https://cgit.freedesktop.org/libreoffice/dictionaries/plain/pt_PT/pt_PT.dic
+
+### Spanish
+
+https://cgit.freedesktop.org/libreoffice/dictionaries/plain/es/es_ES.dic
+https://cgit.freedesktop.org/libreoffice/dictionaries/plain/es/es_MX.dic
+https://raw.githubusercontent.com/lorenbrichter/Words/master/Words/es.txt
+https://raw.githubusercontent.com/JorgeDuenasLerin/diccionario-espanol-txt/master/0_palabras_todas.txt
+
+### English
+
+https://sourceforge.net/projects/wordlist/files/speller/2026.02.25/scowl-2026.02.25.tar.gz/download
+https://raw.githubusercontent.com/lorenbrichter/Words/master/Words/en.txt
+https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt
 
 ## Author
 
